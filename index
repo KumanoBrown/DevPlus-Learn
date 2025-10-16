@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MockTest Lite — Reading Practice</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="mocktest">
+  <header class="mocktest__header" role="banner">
+    <div class="mocktest__container">
+      <h1 class="mocktest__logo">MockTest Lite</h1>
+      <nav class="mocktest__nav" aria-label="Primary">
+        <ul class="mocktest__nav-list">
+          <li class="mocktest__nav-item"><a class="mocktest__nav-link" href="#benefits">Benefits</a></li>
+          <li class="mocktest__nav-item"><a class="mocktest__nav-link" href="#howto">How to use</a></li>
+        </ul>
+      </nav>
+      <a class="mocktest__cta mocktest__cta--primary" href="#start" id="hero-cta">Start a test</a>
+    </div>
+  </header>
+
+  <main class="mocktest__main" role="main">
+    <section class="mocktest__hero" id="hero" aria-labelledby="hero-title">
+      <div class="mocktest__container mocktest__hero-inner">
+        <div class="mocktest__content">
+          <h2 id="hero-title" class="mocktest__title">Practice reading tests quickly with a key</h2>
+          <p class="mocktest__subtitle">Enter a test key, take a timed reading test, and get instant feedback to improve comprehension.</p>
+          <form class="mocktest__form" id="start" onsubmit="openTest(event)">
+            <label class="mocktest__label" for="test-key">Test key</label>
+            <input class="mocktest__input" id="test-key" name="testKey" type="text" placeholder="Enter your test key" required />
+            <div class="mocktest__form-row">
+              <button class="mocktest__cta mocktest__cta--accent" type="submit">Enter key</button>
+              <button class="mocktest__cta mocktest__cta--ghost" type="button" id="demo-btn">Try demo</button>
+            </div>
+          </form>
+
+          <section class="mocktest__benefits" id="benefits" aria-labelledby="benefits-title">
+            <h3 id="benefits-title" class="mocktest__section-title">Benefits</h3>
+            <ul class="mocktest__benefit-list">
+              <li class="mocktest__benefit-item">Real test formats to build confidence</li>
+              <li class="mocktest__benefit-item">Timed practice to improve pacing</li>
+              <li class="mocktest__benefit-item">Instant results and targeted tips</li>
+            </ul>
+          </section>
+        </div>
+
+        <figure class="mocktest__image-wrap" aria-hidden="false">
+          <!-- Inline SVG illustration -->
+          <svg class="mocktest__image" viewBox="0 0 120 120" role="img" aria-labelledby="svgTitle svgDesc">
+            <title id="svgTitle">Reading test illustration</title>
+            <desc id="svgDesc">Stacked pages and a checkmark representing mock test completion</desc>
+            <rect x="8" y="14" rx="4" ry="4" width="96" height="76" fill="#f3f4f6"></rect>
+            <rect x="14" y="20" rx="2" ry="2" width="84" height="60" fill="#fff"></rect>
+            <path d="M32 60 h40" stroke="#e5e7eb" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M32 48 h40" stroke="#e5e7eb" stroke-width="2" stroke-linecap="round"></path>
+            <circle cx="86" cy="36" r="12" fill="#10b981"></circle>
+            <path d="M80 36 l4 6 l8 -10" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+          </svg>
+          <figcaption class="mocktest__image-caption">One-minute setup, full reading practice</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="mocktest__howto" id="howto" aria-labelledby="howto-title">
+      <div class="mocktest__container">
+        <h3 id="howto-title" class="mocktest__section-title">How to use</h3>
+        <ol class="mocktest__howto-list">
+          <li class="mocktest__howto-item">Get a test key from your instructor or use the demo key.</li>
+          <li class="mocktest__howto-item">Enter the key and start the timed reading section.</li>
+          <li class="mocktest__howto-item">Complete questions and review instant feedback.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mocktest__footer" role="contentinfo">
+    <div class="mocktest__container">
+      <p class="mocktest__copyright">© MockTest Lite</p>
+      <nav class="mocktest__footer-nav" aria-label="Footer">
+        <a class="mocktest__footer-link" href="#">Privacy</a>
+        <a class="mocktest__footer-link" href="#">Support</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

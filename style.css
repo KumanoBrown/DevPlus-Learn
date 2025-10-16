@@ -1,0 +1,90 @@
+:root{
+    --color-bg:#ffffff;
+    --color-accent:#0ea5a4;
+    --color-accent-2:#10b981;
+    --color-muted:#6b7280;
+    --max-width:1100px;
+    --gap:1rem;
+    --radius:8px;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color-scheme: light;
+  }
+  
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body.mocktest{
+    margin:0;
+    background:var(--color-bg);
+    color:#111827;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+  }
+  
+  .mocktest__container{
+    width:calc(100% - 2rem);
+    max-width:var(--max-width);
+    margin:0 auto;
+    padding:1rem 0;
+  }
+  
+  /* Header */
+  .mocktest__header{
+    border-bottom:1px solid #e6e9ee;
+    background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.7));
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  .mocktest__header .mocktest__container{
+    display:flex;
+    align-items:center;
+    gap:var(--gap);
+  }
+  .mocktest__logo{
+    font-size:1.125rem;
+    margin:0;
+    font-weight:700;
+  }
+  .mocktest__nav{margin-left:auto}
+  .mocktest__nav-list{display:flex;gap:1rem;list-style:none;margin:0;padding:0}
+  .mocktest__nav-link{text-decoration:none;color:var(--color-muted);font-weight:600}
+  .mocktest__cta{display:inline-block;text-decoration:none;border-radius:999px;padding:0.5rem 1rem;border:1px solid transparent;font-weight:700;cursor:pointer}
+  .mocktest__cta--primary{background:var(--color-accent);color:#fff}
+  .mocktest__cta--accent{background:var(--color-accent-2);color:#fff;border-color:transparent}
+  .mocktest__cta--ghost{background:transparent;color:var(--color-accent-2);border-color:transparent}
+  
+  /* Hero */
+  .mocktest__hero{padding:2rem 0}
+  .mocktest__hero-inner{display:flex;flex-direction:column;gap:1.5rem;align-items:center}
+  .mocktest__content{max-width:680px}
+  .mocktest__title{font-size:1.75rem;margin:0 0 0.5rem}
+  .mocktest__subtitle{margin:0 0 1rem;color:var(--color-muted)}
+  .mocktest__form{display:flex;flex-direction:column;gap:0.75rem}
+  .mocktest__label{font-weight:700;font-size:0.875rem}
+  .mocktest__input{padding:0.6rem 0.75rem;border-radius:6px;border:1px solid #e6e9ee;font-size:1rem}
+  .mocktest__form-row{display:flex;gap:0.5rem;margin-top:0.25rem}
+  
+  /* Benefits & howto */
+  .mocktest__section-title{font-size:1.125rem;margin:1rem 0}
+  .mocktest__benefit-list{list-style:disc;margin:0 0 0 1.25rem;padding:0;color:var(--color-muted)}
+  .mocktest__howto-list{margin:0;padding-left:1.25rem;color:var(--color-muted)}
+  
+  /* Image */
+  .mocktest__image-wrap{margin-top:1rem;text-align:center}
+  .mocktest__image{width:220px;height:auto;display:block;margin:0 auto}
+  .mocktest__image-caption{font-size:0.875rem;color:var(--color-muted);margin-top:0.5rem}
+  
+  /* Footer */
+  .mocktest__footer{border-top:1px solid #e6e9ee;padding:1rem 0;margin-top:2rem}
+  .mocktest__footer-nav{display:flex;gap:0.5rem;justify-content:flex-end}
+  .mocktest__footer-link{text-decoration:none;color:var(--color-muted);font-weight:600}
+  
+  /* Responsive layout breakpoint */
+  @media (min-width:768px){
+    .mocktest__hero-inner{flex-direction:row;align-items:stretch;justify-content:space-between}
+    .mocktest__content{flex:1;padding-right:1.5rem}
+    .mocktest__image-wrap{flex:0 0 320px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+    .mocktest__title{font-size:2rem}
+    .mocktest__input{width:320px}
+  }
+  
