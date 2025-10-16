@@ -1,19 +1,44 @@
-// Minimal behavior: demo key and open test placeholder
+// Accessibility and keyboard-friendly behaviors for MockTest Lite
+
+// Demo button fills key and moves focus to Enter key button
 document.getElementById('demo-btn').addEventListener('click', function(){
-    document.getElementById('test-key').value = 'DEMO-READ-01';
-    document.getElementById('hero-cta').scrollIntoView({behavior:'smooth'});
+    const input = document.getElementById('test-key');
+    input.value = 'DEMO-READ-01';
+    input.focus();
+    // update live message for assistive tech
+    const msg = document.getElementById('form-message');
+    msg.textContent = 'Demo key populated. Press Enter to submit.';
   });
   
+  // When form submits, validate and announce result to screen readers
   function openTest(e){
     e.preventDefault();
-    const key = document.getElementById('test-key').value.trim();
-    // In a real app, validate key via API and redirect to the test page
+    const input = document.getElementById('test-key');
+    const key = input.value.trim();
+    const msg = document.getElementById('form-message');
+  
     if(!key){
-      alert('Please enter a test key');
+      msg.textContent = 'Please enter a test key.';
+      input.focus();
       return;
     }
-    // Placeholder navigation
-    alert('Test key accepted: ' + key + '. Redirecting to reading test...');
-    // window.location.href = '/test?key=' + encodeURIComponent(key);
+  
+    msg.textContent = 'Test key accepted: ' + key + '. Redirecting to reading test.';
+    // move focus to main so screen reader user hears the message
+    document.getElementById('main').focus();
+  
+    // replace with actual navigation in production
+    setTimeout(function(){
+      // window.location.href = '/test?key=' + encodeURIComponent(key);
+    }, 600);
   }
+  
+  // Keyboard support: Enter on focused CTA behaves like click (anchors do by default)
+  // Ensure links and buttons are reachable with Tab naturally; avoid tabindex > 0
+  // Add a small handler to close any potential modal or dialogs with Escape in future
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      // Placeholder for closing overlays if implemented later
+    }
+  });
   
