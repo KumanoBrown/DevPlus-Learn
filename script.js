@@ -1,44 +1,62 @@
-// Accessibility and keyboard-friendly behaviors for MockTest Lite
+// Accessible interactions: mobile menu toggle, demo key, form submit, Escape handling
 
-// Demo button fills key and moves focus to Enter key button
-document.getElementById('demo-btn').addEventListener('click', function(){
-    const input = document.getElementById('test-key');
+// Menu toggle management
+const menuToggle = document.getElementById('menu-toggle');
+const primaryNav = document.getElementById('primary-nav');
+
+if (menuToggle && primaryNav) {
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!expanded));
+    primaryNav.hidden = expanded;
+    if (!expanded) {
+      const firstLink = primaryNav.querySelector('a');
+      if (firstLink) firstLink.focus();
+    } else {
+      menuToggle.focus();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (primaryNav && !primaryNav.hidden) {
+        primaryNav.hidden = true;
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.focus();
+      }
+    }
+  });
+}
+
+// Demo key behavior and live region updates
+const demoBtn = document.getElementById('demo-btn');
+const input = document.getElementById('test-key');
+const formMessage = document.getElementById('form-message');
+
+if (demoBtn && input) {
+  demoBtn.addEventListener('click', () => {
     input.value = 'DEMO-READ-01';
     input.focus();
-    // update live message for assistive tech
-    const msg = document.getElementById('form-message');
-    msg.textContent = 'Demo key populated. Press Enter to submit.';
+    if (formMessage) formMessage.textContent = 'Demo key populated. Press Enter or click Enter key to submit.';
   });
-  
-  // When form submits, validate and announce result to screen readers
-  function openTest(e){
-    e.preventDefault();
-    const input = document.getElementById('test-key');
-    const key = input.value.trim();
-    const msg = document.getElementById('form-message');
-  
-    if(!key){
-      msg.textContent = 'Please enter a test key.';
-      input.focus();
-      return;
-    }
-  
-    msg.textContent = 'Test key accepted: ' + key + '. Redirecting to reading test.';
-    // move focus to main so screen reader user hears the message
-    document.getElementById('main').focus();
-  
-    // replace with actual navigation in production
-    setTimeout(function(){
-      // window.location.href = '/test?key=' + encodeURIComponent(key);
-    }, 600);
+}
+
+// Form submission with ARIA announcements and focus management
+function openTest(e) {
+  e.preventDefault();
+  const key = input.value.trim();
+  if (!key) {
+    if (formMessage) formMessage.textContent = 'Please enter a test key.';
+    input.focus();
+    return;
   }
-  
-  // Keyboard support: Enter on focused CTA behaves like click (anchors do by default)
-  // Ensure links and buttons are reachable with Tab naturally; avoid tabindex > 0
-  // Add a small handler to close any potential modal or dialogs with Escape in future
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape'){
-      // Placeholder for closing overlays if implemented later
-    }
-  });
-  
+  if (formMessage) formMessage.textContent = 'Test key accepted: ' + key + '. Redirecting to reading test.';
+  const main = document.getElementById('main');
+  if (main) main.focus();
+  // Replace with real navigation in production
+  setTimeout(() => {
+    // window.location.href = '/test?key=' + encodeURIComponent(key);
+  }, 600);
+}
+
+// Preserve natural tab order by using native controls and avoiding tabindex > 0

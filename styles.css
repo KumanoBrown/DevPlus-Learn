@@ -11,6 +11,7 @@
   color-scheme: light;
 }
 
+/* Box model and base */
 *{box-sizing:border-box}
 html,body{height:100%}
 body.mocktest{
@@ -21,20 +22,20 @@ body.mocktest{
   -webkit-font-smoothing:antialiased;
 }
 
-/* Screen-reader only helper */
-.mocktest__sr{
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0 0 0 0);
-  white-space:nowrap;
-  border:0;
+/* Modern visually-hidden helper */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* Skip link visible on keyboard focus */
+/* Skip link */
 .mocktest__skip-link{
   position:absolute;
   left:0.5rem;
@@ -83,7 +84,26 @@ body.mocktest{
   color:inherit;
   text-decoration:none;
 }
-.mocktest__nav{margin-left:auto}
+
+/* Menu toggle (mobile) */
+.mocktest__menu-toggle{
+  margin-left:auto;
+  background:transparent;
+  border:1px solid transparent;
+  padding:0.5rem 0.75rem;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:700;
+  display:none;
+}
+.mocktest__menu-toggle:focus,
+.mocktest__menu-toggle:focus-visible{
+  outline:3px solid var(--color-focus);
+  outline-offset:3px;
+  box-shadow:0 0 0 4px rgba(3,105,161,0.08);
+}
+
+/* Nav */
 .mocktest__nav-list{display:flex;gap:1rem;list-style:none;margin:0;padding:0}
 .mocktest__nav-link{text-decoration:none;color:var(--color-muted);font-weight:600;padding:0.25rem 0.5rem;border-radius:6px}
 .mocktest__nav-link:focus,
@@ -99,7 +119,15 @@ body.mocktest{
 .mocktest__cta:focus-visible{outline:3px solid var(--color-focus);outline-offset:3px;box-shadow:0 0 0 4px rgba(3,105,161,0.12)}
 .mocktest__cta--primary{background:var(--color-accent);color:#fff}
 .mocktest__cta--accent{background:var(--color-accent-2);color:#fff;border-color:transparent}
-.mocktest__cta--ghost{background:transparent;color:var(--color-accent-2);border-color:transparent}
+.mocktest__cta--ghost{background:transparent;color:var(--color-accent-2);border-color:transparent; border:1px solid rgba(16,185,129,0.12)}
+
+/* Ensure sufficient tap target sizes */
+.mocktest__cta,
+.mocktest__menu-toggle,
+.mocktest__nav-link,
+.mocktest__mock-input {
+  min-height:44px;
+}
 
 /* Hero */
 .mocktest__hero{padding:2rem 0}
@@ -113,7 +141,7 @@ body.mocktest{
 .mocktest__input:focus,
 .mocktest__input:focus-visible{outline:3px solid var(--color-focus);outline-offset:3px;box-shadow:0 0 0 4px rgba(3,105,161,0.08)}
 .mocktest__form-row{display:flex;gap:0.5rem;margin-top:0.25rem}
-.mocktest__form-message{min-height:1.25rem;color:var(--color-muted);font-size:0.95rem;}
+.mocktest__form-message{min-height:1.25rem;color:var(--color-muted);font-size:0.95rem}
 
 /* Benefits & howto */
 .mocktest__section-title{font-size:1.125rem;margin:1rem 0}
@@ -122,8 +150,6 @@ body.mocktest{
 
 /* Image */
 .mocktest__image-wrap{margin-top:1rem;text-align:center}
-.mocktest__image-wrap:focus,
-.mocktest__image-wrap:focus-visible{outline:3px solid rgba(16,185,129,0.6);outline-offset:3px;border-radius:8px}
 .mocktest__image{width:220px;height:auto;display:block;margin:0 auto}
 .mocktest__image-caption{font-size:0.875rem;color:var(--color-muted);margin-top:0.5rem}
 
@@ -143,14 +169,23 @@ body.mocktest{
   .mocktest__image{width:180px}
   .mocktest__form-row{flex-direction:column;align-items:stretch}
   .mocktest__cta{width:100%}
-  .mocktest__nav-list{display:none} /* simplified nav for small screens */
+
+  /* Mobile nav toggle visible and nav controlled via [hidden] */
+  .mocktest__menu-toggle{display:block}
+  #primary-nav[hidden]{display:none}
+  .mocktest__nav-list{flex-direction:column;gap:0.25rem}
 }
 
 /* Desktop breakpoint */
 @media (min-width:768px){
+  .mocktest__menu-toggle{display:none}
+  #primary-nav{display:block !important}
   .mocktest__hero-inner{flex-direction:row;align-items:stretch;justify-content:space-between}
   .mocktest__content{flex:1;padding-right:1.5rem}
   .mocktest__image-wrap{flex:0 0 320px;display:flex;flex-direction:column;justify-content:center;align-items:center}
   .mocktest__title{font-size:2rem}
   .mocktest__input{width:320px}
 }
+
+/* Focus fallback for browsers without :focus-visible support */
+a:focus, button:focus, input:focus { outline:3px solid var(--color-focus); outline-offset:3px; }
