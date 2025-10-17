@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Test Questions - MockTest Lite</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="mocktest">
+  <header class="mocktest__header" role="banner">
+    <div class="mocktest__container">
+      <a class="mocktest__logo" href="/" aria-label="MockTest Lite home">MockTest Lite</a>
+      <a class="mocktest__cta mocktest__cta--ghost" href="index.html">Back to Home</a>
+    </div>
+  </header>
+
+  <main id="main" class="mocktest__main" role="main" tabindex="-1">
+    <section id="questions-section" class="mocktest__questions" aria-live="polite">
+      <div class="mocktest__container">
+        <div id="questions-container">
+          <!-- Questions will be rendered here -->
+        </div>
+        <div id="loading-state" class="mocktest__state-message" hidden>Loading questions...</div>
+        <div id="error-state" class="mocktest__state-message" hidden>Error loading questions. Please try again.</div>
+        <div id="empty-state" class="mocktest__state-message" hidden>No questions available.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="test-script.js"></script>
+</body>
+</html>

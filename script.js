@@ -53,10 +53,86 @@ function openTest(e) {
   if (formMessage) formMessage.textContent = 'Test key accepted: ' + key + '. Redirecting to reading test.';
   const main = document.getElementById('main');
   if (main) main.focus();
-  // Replace with real navigation in production
+  // Navigate to test page
   setTimeout(() => {
-    // window.location.href = '/test?key=' + encodeURIComponent(key);
+    window.location.href = 'test.html?key=' + encodeURIComponent(key);
   }, 600);
+}
+
+// Handle back navigation and form reset
+const loadingState = document.getElementById('loading-state');
+const errorState = document.getElementById('error-state');
+const emptyState = document.getElementById('empty-state');
+const questionsContainer = document.getElementById('questions-container');
+
+// Function to show state
+function showState(stateElement) {
+  // Hide all states first
+  [loadingState, errorState, emptyState].forEach(el => el.hidden = true);
+  if (stateElement) {
+    stateElement.hidden = false;
+  }
+}
+
+// Function to render a question
+function renderQuestion(question) {
+  const questionElement = document.createElement('div');
+  questionElement.className = 'mocktest__question';
+  questionElement.setAttribute('data-testid', `question-${question.id}`);
+
+  questionElement.innerHTML = `
+    <h3 class="mocktest__question-text">${question.question}</h3>
+    <ul class="mocktest__options">
+      ${question.options.map((option, index) => `
+        <li class="mocktest__option">
+          <label>
+            <input type="radio" name="question${question.id}" value="${index}">
+            ${option}
+          </label>
+        </li>
+      `).join('')}
+    </ul>
+  `;
+
+  return questionElement;
+}
+
+// Function to fetch and render questions
+async function fetchAndRenderQuestions() {
+  try {
+    showState(loadingState);
+    questionsContainer.innerHTML = '';
+
+    const response = await fetch('questions.json');
+    if (!response.ok) {
+      throw new Error('Failed to fetch questions');
+    }
+
+    const data = await response.json();
+    
+    if (!data.questions || data.questions.length === 0) {
+      showState(emptyState);
+      return;
+    }
+
+    showState(null);
+    data.questions.forEach(question => {
+      questionsContainer.appendChild(renderQuestion(question));
+    });
+
+  } catch (error) {
+    console.error('Error fetching questions:', error);
+    showState(errorState);
+  }
+}
+
+// Export for testing
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    renderQuestion,
+    showState,
+    fetchAndRenderQuestions
+  };
 }
 
 // Preserve natural tab order by using native controls and avoiding tabindex > 0

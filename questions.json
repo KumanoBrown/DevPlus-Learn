@@ -1,0 +1,26 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is JavaScript?",
+      "options": [
+        "A programming language",
+        "A markup language",
+        "A database",
+        "A server"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "id": 2,
+      "question": "What does HTML stand for?",
+      "options": [
+        "Hyperlinks Text Markup Language",
+        "Hyper Text Markup Language",
+        "High Tech Modern Language",
+        "Hyper Transfer Markup Language"
+      ],
+      "correctAnswer": 1
+    }
+  ]
+}
