@@ -27,6 +27,16 @@
     </section>
   </main>
 
-  <script src="test-script.js"></script>
+  <!-- React (UMD) - development builds for local editing. Swap to production in production. -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <!-- Components (UMD-style) -->
+  <script src="components/NavBar.js" defer></script>
+  <script src="components/Choices.js" defer></script>
+  <script src="components/QuestionCard.js" defer></script>
+
+  <!-- Main React app that uses the components -->
+  <script src="react-app.js" defer></script>
 </body>
 </html>
